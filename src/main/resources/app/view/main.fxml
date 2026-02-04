@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import java.net.URL?>
+
+<VBox spacing="12"
+      alignment="TOP_CENTER"
+      xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="app.controller.MainController"
+      prefWidth="1100" prefHeight="750"
+      styleClass="root">
+
+    <!-- ✅ подключение CSS (main.fxml находится в /app/view/) -->
+    <stylesheets>
+        <URL value="@style/style.css"/>
+    </stylesheets>
+
+    <padding>
+        <Insets top="16" right="16" bottom="16" left="16"/>
+    </padding>
+
+    <Label text="FITNESS TRACKER" styleClass="title"/>
+
+    <!-- ✅ ВКЛАДКИ -->
+    <TabPane fx:id="mainTabs" tabClosingPolicy="UNAVAILABLE" styleClass="tabs">
+
+        <!-- ================= TAB 1: DASHBOARD + WORKOUTS ================= -->
+        <Tab text="Dashboard / Workouts">
+            <VBox spacing="12" styleClass="tab-content">
+
+                <!-- DASHBOARD + FILTER -->
+                <HBox spacing="12" alignment="CENTER_LEFT" styleClass="top-bar">
+
+                    <VBox spacing="6" styleClass="stat-card">
+                        <Label text="Workouts" styleClass="stat-label"/>
+                        <Label fx:id="dashWorkouts" text="0" styleClass="stat-value"/>
+                    </VBox>
+
+                    <VBox spacing="6" styleClass="stat-card">
+                        <Label text="Total minutes" styleClass="stat-label"/>
+                        <Label fx:id="dashMinutes" text="0" styleClass="stat-value"/>
+                    </VBox>
+
+                    <VBox spacing="6" styleClass="stat-card">
+                        <Label text="Total calories" styleClass="stat-label"/>
+                        <Label fx:id="dashCalories" text="0" styleClass="stat-value"/>
+                    </VBox>
+
+                    <VBox spacing="6" styleClass="stat-card">
+                        <Label text="Last date" styleClass="stat-label"/>
+                        <Label fx:id="dashLastDate" text="-" styleClass="stat-value"/>
+                    </VBox>
+
+                    <Region HBox.hgrow="ALWAYS"/>
+
+                    <Label text="Period:" styleClass="muted-label"/>
+                    <ComboBox fx:id="periodBox" prefWidth="150" styleClass="input"/>
+
+                    <Label text="From:" styleClass="muted-label"/>
+                    <DatePicker fx:id="fromDate" styleClass="input"/>
+
+                    <Label text="To:" styleClass="muted-label"/>
+                    <DatePicker fx:id="toDate" styleClass="input"/>
+
+                    <Button text="Refresh" onAction="#onRefreshClick" styleClass="btn-primary"/>
+                </HBox>
+
+                <!-- USER PICK (для админа) -->
+                <HBox spacing="10" alignment="CENTER_LEFT" styleClass="row">
+                    <Label text="User:" styleClass="muted-label"/>
+                    <TableView fx:id="userTable" prefHeight="140" prefWidth="450" styleClass="table">
+                        <columns>
+                            <TableColumn fx:id="colId" text="ID" prefWidth="80"/>
+                            <TableColumn fx:id="colUsername" text="Username" prefWidth="320"/>
+                        </columns>
+                    </TableView>
+
+                    <Region HBox.hgrow="ALWAYS"/>
+
+                    <Button text="Logout" onAction="#onLogoutClick" styleClass="btn-ghost"/>
+                </HBox>
+
+                <!-- WORKOUTS BUTTONS -->
+                <HBox spacing="10" styleClass="row">
+                    <Button text="Load workouts" onAction="#onLoadWorkoutsClick" styleClass="btn"/>
+                    <Button text="Add workout" onAction="#onAddWorkoutClick" styleClass="btn-primary"/>
+                    <Button text="Edit workout" onAction="#onEditWorkoutClick" styleClass="btn"/>
+                    <Button text="Delete workout" onAction="#onDeleteWorkoutClick" styleClass="btn-danger"/>
+                    <Button text="Import CSV" onAction="#onImportCsvClick" styleClass="btn"/>
+
+                    <Region HBox.hgrow="ALWAYS"/>
+
+                    <Button text="Charts" onAction="#onChartsClick" styleClass="btn"/>
+                    <Button text="Stats by type" onAction="#onStatsByTypeClick" styleClass="btn"/>
+                    <Button text="Export CSV" onAction="#onExportCsvClick" styleClass="btn"/>
+                </HBox>
+
+                <Label text="Workouts:" styleClass="section-title"/>
+
+                <TableView fx:id="workoutTable" prefHeight="330" VBox.vgrow="ALWAYS" styleClass="table">
+
+                <columns>
+                        <TableColumn fx:id="wColCategory" text="Category" prefWidth="160"/>
+                        <TableColumn fx:id="wColDate" text="Date" prefWidth="120"/>
+                        <TableColumn fx:id="wColType" text="Type" prefWidth="180"/>
+                        <TableColumn fx:id="wColDuration" text="Min" prefWidth="80"/>
+                        <TableColumn fx:id="wColCalories" text="Calories" prefWidth="110"/>
+                        <TableColumn fx:id="wColNotes" text="Notes" prefWidth="420"/>
+                    </columns>
+                </TableView>
+
+            </VBox>
+        </Tab>
+
+        <!-- ================= TAB 2: USERS (ADMIN) ================= -->
+        <Tab fx:id="usersTab" text="Users (Admin)">
+            <VBox spacing="12" styleClass="tab-content">
+
+                <HBox spacing="10" styleClass="row">
+                    <Button fx:id="usersBtn" text="Load users" onAction="#onUsersClick" styleClass="btn"/>
+                    <Button fx:id="addUserBtn" text="Add user" onAction="#onAddUserClick" styleClass="btn-primary"/>
+                    <Button fx:id="deleteUserBtn" text="Delete user" onAction="#onDeleteUserClick" styleClass="btn-danger"/>
+                </HBox>
+
+                <TableView fx:id="adminUsersTable" prefHeight="520" VBox.vgrow="ALWAYS" styleClass="table">
+
+                <columns>
+                        <TableColumn fx:id="adminColId" text="ID" prefWidth="100"/>
+                        <TableColumn fx:id="adminColUsername" text="Username" prefWidth="300"/>
+                        <TableColumn fx:id="adminColRole" text="Role" prefWidth="140"/>
+                    </columns>
+                </TableView>
+
+            </VBox>
+        </Tab>
+
+        <!-- ================= TAB 3: CATEGORIES (ADMIN) ================= -->
+        <Tab fx:id="categoriesTab" text="Categories (Admin)">
+            <VBox spacing="12" styleClass="tab-content">
+
+                <HBox spacing="10" styleClass="row">
+                    <Button text="Load categories" onAction="#onLoadCategoriesClick" styleClass="btn"/>
+                    <Button text="Add category" onAction="#onAddCategoryClick" styleClass="btn-primary"/>
+                    <Button text="Edit category" onAction="#onEditCategoryClick" styleClass="btn"/>
+                    <Button text="Delete category" onAction="#onDeleteCategoryClick" styleClass="btn-danger"/>
+                </HBox>
+
+                <TableView fx:id="categoryTable" prefHeight="520" VBox.vgrow="ALWAYS" styleClass="table">
+
+                <columns>
+                        <TableColumn fx:id="catColId" text="ID" prefWidth="120"/>
+                        <TableColumn fx:id="catColName" text="Name" prefWidth="520"/>
+                    </columns>
+                </TableView>
+
+            </VBox>
+        </Tab>
+
+    </TabPane>
+
+    <Label fx:id="statusLabel" text="Ready" styleClass="status"/>
+</VBox>

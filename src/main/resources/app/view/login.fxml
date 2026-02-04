@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox spacing="15" alignment="CENTER"
+      xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="app.controller.LoginController">
+
+    <Label text="Fitness Tracker - Login"
+           style="-fx-font-size: 20; -fx-font-weight: bold;"/>
+
+    <TextField fx:id="usernameField" promptText="Username"/>
+    <PasswordField fx:id="passwordField" promptText="Password"/>
+
+    <Button text="Login" onAction="#onLoginClick"/>
+
+</VBox>

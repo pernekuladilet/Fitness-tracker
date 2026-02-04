@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox spacing="12"
+      xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="app.controller.ChartsController"
+      styleClass="root">
+
+    <padding>
+        <Insets top="16" right="16" bottom="16" left="16"/>
+    </padding>
+
+    <Label text="Charts" styleClass="section-title"/>
+
+    <TabPane>
+        <tabs>
+            <Tab text="Calories by date">
+                <content>
+                    <LineChart fx:id="caloriesChart">
+                        <xAxis>
+                            <CategoryAxis label="Date"/>
+                        </xAxis>
+                        <yAxis>
+                            <NumberAxis label="Calories"/>
+                        </yAxis>
+                    </LineChart>
+                </content>
+            </Tab>
+
+            <Tab text="Minutes by date">
+                <content>
+                    <LineChart fx:id="minutesChart">
+                        <xAxis>
+                            <CategoryAxis label="Date"/>
+                        </xAxis>
+                        <yAxis>
+                            <NumberAxis label="Minutes"/>
+                        </yAxis>
+                    </LineChart>
+                </content>
+            </Tab>
+
+            <Tab text="Types (Pie)">
+                <content>
+                    <PieChart fx:id="typePie" title="Workouts by type"/>
+                </content>
+            </Tab>
+        </tabs>
+    </TabPane>
+
+    <HBox spacing="10" alignment="CENTER_RIGHT">
+        <Button text="Close" onAction="#onCloseClick" styleClass="btn"/>
+    </HBox>
+</VBox>

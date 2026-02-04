@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="15"
+      alignment="TOP_CENTER"
+      xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="app.controller.StatsController"
+      prefWidth="700" prefHeight="600">
+
+    <Label text="Workout statistics"
+           style="-fx-font-size: 22; -fx-font-weight: bold;"/>
+
+    <HBox spacing="15">
+
+        <!-- PIE -->
+        <PieChart fx:id="pieChart"
+                  prefWidth="320"
+                  prefHeight="300"/>
+
+        <!-- BAR -->
+        <BarChart fx:id="barChart"
+                  prefWidth="340"
+                  prefHeight="300">
+            <xAxis>
+                <CategoryAxis label="Workout type"/>
+            </xAxis>
+            <yAxis>
+                <NumberAxis label="Calories"/>
+            </yAxis>
+        </BarChart>
+
+    </HBox>
+
+    <!-- TABLE -->
+    <TableView fx:id="table" prefHeight="220">
+        <columns>
+            <TableColumn fx:id="colType" text="Type" prefWidth="180"/>
+            <TableColumn fx:id="colCount" text="Count" prefWidth="100"/>
+            <TableColumn fx:id="colMinutes" text="Minutes" prefWidth="120"/>
+            <TableColumn fx:id="colCalories" text="Calories" prefWidth="120"/>
+        </columns>
+    </TableView>
+
+</VBox>
